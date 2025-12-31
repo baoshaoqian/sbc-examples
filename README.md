@@ -1,13 +1,8 @@
-# 0.96 inch OLED Display Example Code
+# SBC Examples
 
-This repository contains example code for interfacing with a 0.96 inch OLED display using various microcontrollers. The code demonstrates how to initialize the display, draw shapes, and display text.
+## 0.96" OLED Display with I2C Interface
 
-## Hardware
-
-- A 0.96 inch OLED display (typically using the SSD1306 driver)
-- A microcontroller (Tested with Raspberry Pi 4, Raspberry Pi 5, Radxa Cubie A7A)
-
-## Software
+### I2C Setup
 
 First, enable I2C on your microcontroller and connect the OLED display according to the following pinout:
 - VCC to 3.3V or 5V
@@ -24,19 +19,31 @@ sudo i2cdetect -y 1
 sudo i2cdetect -y 7
 ```
 
-### Cubie A7A
+### Python Setup
 
-1. OS: Debian Bullseye
-2. Install necessary libraries:
-   ```bash
-   sudo pip3 install python-periphery
-   ```
-3. Run the example code:
-   - i2c_teset.py
-   - oled96_hello.py
+1. Make sure you have the required Python libraries installed. You can install them using pip:
 
-### Raspberry Pi 4 / Raspberry Pi 5
+```bash
+# It is recommended to use a virtual environment,
+# create a virtual environment in your project directory and activate it.
+python3 -m venv venv
+source venv/bin/activate
 
-1. OS: Raspberry Pi OS
+# Make sure the virtual environment is activated,
+# then install the required libraries:
+pip install python-periphery
+```
 
-TODO
+2. Run the provided Python scripts to test I2C communication and display a message on the OLED screen:
+> Be sure to adjust the I2C bus number in the scripts if necessary (e.g., `/dev/i2c-1` for Raspberry Pi, `/dev/i2c-7` for Cubie A7A, etc.).
+
+
+```bash
+# Run the I2C test script to verify communication with the OLED display
+python i2c_test.py
+
+# Run the OLED display script to see the output on the screen
+python oled_hello.py
+```
+
+

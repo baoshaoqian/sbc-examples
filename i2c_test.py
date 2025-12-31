@@ -6,7 +6,7 @@ def i2c_device_detection():
     """
     # Modify according to your hardware connection
     # Common I2C bus devices: /dev/i2c-0, etc.
-    I2C_BUS = "/dev/i2c-7"
+    I2C_BUS = "/dev/i2c-1"
     TARGET_ADDR = 0x3C  # Target address to check
 
     i2c = None  # Initialize I2C object reference
