@@ -5,7 +5,7 @@ def i2c_device_detection():
     Pin reference: PJ23 (SDA), PJ22 (SCL)
     """
     # Modify according to your hardware connection
-    # Common I2C bus devices: /dev/i2c-0, etc.
+    # Common I2C bus devices: /dev/i2c-1 for Raspberry Pi, /dev/i2c-7 for Cubie A7A, etc.
     I2C_BUS = "/dev/i2c-1"
     TARGET_ADDR = 0x3C  # Target address to check
 
