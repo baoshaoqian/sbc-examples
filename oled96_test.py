@@ -2,7 +2,7 @@ from periphery import I2C
 import time
 
 I2C_ADDR = 0x3c
-I2C_BUS = "/dev/i2c-1"
+I2C_BUS = "/dev/i2c-7"
 
 i2c = I2C(I2C_BUS)
 
@@ -49,9 +49,20 @@ def oled_clear():
 oled_clear()
 
 # Place a single pixel in the center of the display
-i2c.transfer(I2C_ADDR, [I2C.Message([0x00, 0xB0 + 4])])  # Page 4
+# i2c.transfer(I2C_ADDR, [I2C.Message([0x00, 0xB0 + 4])])  # Page 4
+# i2c.transfer(I2C_ADDR, [I2C.Message([0x00, 0x00])])      # Lower column address 0
+# i2c.transfer(I2C_ADDR, [I2C.Message([0x00, 0x10])])      # Higher column address 0
+# i2c.transfer(I2C_ADDR, [I2C.Message([0x40] + [0x00]*63 + [0x01] + [0x00]*64)])  # Set pixel at (64, 32)
+
+# Play around with different byte to see the pixel change
+i2c.transfer(I2C_ADDR, [I2C.Message([0x00, 0xB0])])      # Page 0
 i2c.transfer(I2C_ADDR, [I2C.Message([0x00, 0x00])])      # Lower column address 0
-i2c.transfer(I2C_ADDR, [I2C.Message([0x00, 0x10])])      # Higher column address 64 (0x40)
-i2c.transfer(I2C_ADDR, [I2C.Message([0x40] + [0x00]*63 + [0x01] + [0x00]*64)])  # Set pixel at (64, 32)
+i2c.transfer(I2C_ADDR, [I2C.Message([0x00, 0x10])])      # Higher column address 0
+for _ in range(128):
+    i2c.transfer(I2C_ADDR, [I2C.Message([0x40, 0xFF])])
+
+# Turn off display after 5 seconds
+time.sleep(5)
+i2c.transfer(I2C_ADDR, [I2C.Message([0x00, 0xAE])])
 
 i2c.close()
