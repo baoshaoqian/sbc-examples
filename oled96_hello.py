@@ -2,7 +2,7 @@ from periphery import I2C
 import time
 
 I2C_ADDR = 0x3c
-I2C_BUS = "/dev/i2c-7"
+I2C_BUS = "/dev/i2c-1"
 
 i2c = I2C(I2C_BUS)
 
